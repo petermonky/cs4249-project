@@ -1,0 +1,15 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  column-gap: 20px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.icon {
+  color: #e55227;
+}

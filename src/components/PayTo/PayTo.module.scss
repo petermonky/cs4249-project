@@ -1,0 +1,82 @@
+.payTo {
+  background-color: #f4f4f4;
+  height: 100vh;
+}
+
+.header {
+  background-color: white;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.container {
+  padding: 10px;
+}
+
+.recipient {
+  background-color: white;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 20px;
+  margin-bottom: 10px;
+
+  &__image {
+    aspect-ratio: 1;
+    background-color: blue;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+
+  &__name {
+    font-size: 16px;
+  }
+}
+
+.payment {
+  background-color: white;
+  padding: 16px;
+
+  &__title {
+    font-size: 14px;
+    color: #a2a2a2;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+  }
+
+  &__sign {
+    font-size: 24px;
+  }
+
+  &__cost {
+    padding-left: 4px;
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  &__memo {
+    color: #e4e4e4;
+  }
+}
+
+.confirm {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding: 8px;
+
+  &__text {
+    background-color: #ed4d2d;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+  }
+}
