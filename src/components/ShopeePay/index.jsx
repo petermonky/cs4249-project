@@ -29,14 +29,14 @@ function ShopeePay() {
           </Link>
           <span className={styles.title}>ShopeePay</span>
         </div>
-        {variant === "1" && (
+        {["1", "4"].includes(variant) && (
           <div className={styles.wallet}>
             <span className={styles.wallet__sign}>$</span>
             <span className={styles.wallet__amount}>0.00</span>
           </div>
         )}
       </div>
-      {variant === "1" && (
+      {["1", "4"].includes(variant) && (
         <>
           <div className={styles.body}>
             <div className={styles.tray}>
@@ -72,7 +72,7 @@ function ShopeePay() {
           </div>
         </>
       )}
-      {variant === "3" && (
+      {["3", "6"].includes(variant) && (
         <>
           <div className={styles.tabButtons}>
             <button
