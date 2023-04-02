@@ -1,15 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styles from './App.module.scss'
-import { useSearchParams } from 'react-router-dom';
 import Main from "../Main"
-import { useRef } from 'react';
+import Scan from "../Scan"
+import PayTo from "../PayTo"
 
 function App() {
-  const [searchParams] = useSearchParams();
-  const idRef = useRef(searchParams.get("id"))
-
   return (
     <div className={styles.app}>
-      <Main />
+      <Router>
+        <Routes>
+          <Route path="/1">
+            <Route index element={<Main />} />
+            <Route path='scan' element={<Scan />} />
+            <Route path='payto' element={<PayTo />} />
+          </Route>
+        </Routes>
+      </Router>
     </div>
   )
 }

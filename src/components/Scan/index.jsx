@@ -10,7 +10,7 @@ function Scan() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/payto');
+      navigate('../payto');
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -18,7 +18,7 @@ function Scan() {
 
   return (
     <div className={styles.scan}>
-    <Link to={`/`} >
+    <Link to={`..`} relative='path' >
         <AiOutlineArrowLeft size={24} color="white" className={styles.icon} />
     </Link>
       <div className={styles.qrContainer}>

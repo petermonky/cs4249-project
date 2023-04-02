@@ -8,7 +8,7 @@ function PayTo() {
   return (
     <div className={styles.payTo}>
       <div className={styles.header}>
-        <Link to={`/scan`} >
+        <Link to={`../scan`} >
             <AiOutlineArrowLeft size={24} color="black" className={styles.icon} />
         </Link>
        <span>Pay To</span>
