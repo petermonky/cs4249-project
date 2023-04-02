@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from "./Scan.module.scss"
 
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import Barcode from "../Barcode"
 
 function Scan() {
@@ -17,6 +18,9 @@ function Scan() {
 
   return (
     <div className={styles.scan}>
+    <Link to={`/`} >
+        <AiOutlineArrowLeft size={24} color="white" className={styles.icon} />
+    </Link>
       <div className={styles.qrContainer}>
         <div className={styles.qr}></div>
       </div>

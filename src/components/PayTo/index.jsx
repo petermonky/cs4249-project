@@ -1,10 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from "./PayTo.module.scss"
+
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 function PayTo() {
   return (
     <div className={styles.payTo}>
-      <div className={styles.header}>Pay To</div>
+      <div className={styles.header}>
+        <Link to={`/scan`} >
+            <AiOutlineArrowLeft size={24} color="black" className={styles.icon} />
+        </Link>
+       <span>Pay To</span>
+      </div>
       <div className={styles.container}>
         <div className={styles.recipient}>
           <div className={styles.recipient__image}></div>
