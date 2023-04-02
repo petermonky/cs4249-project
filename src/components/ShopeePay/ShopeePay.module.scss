@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+.scanSelected {
+  background-color: black;
+}
+
 .top {
   background-color: #fa502f;
   color: white;
@@ -74,4 +78,94 @@
   padding: 12px;
   background-color: white;
   margin-bottom: 10px;
+}
+
+.tabButtons {
+  display: flex;
+  padding: 8px;
+  column-gap: 12px;
+  overflow: scroll;
+  background-color: #f4f4f4;
+}
+
+.tabButton {
+  white-space: nowrap;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  box-shadow: 0px 5px 5px -4px rgba(0,0,0,0.05);
+}
+
+.selected {
+  background: #fa502f;
+  color: white;
+}
+
+.container {
+  padding: 10px;
+}
+
+.payment {
+  background-color: white;
+  padding: 16px;
+
+  &__title {
+    font-size: 14px;
+    color: #a2a2a2;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+  }
+
+  &__sign {
+    font-size: 24px;
+  }
+
+  &__cost {
+    padding-left: 4px;
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  &__memo {
+    color: #e4e4e4;
+  }
+}
+
+.confirm {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding: 8px;
+
+  &__text {
+    background-color: #ed4d2d;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+  }
+}
+
+.qrContainer {
+  padding: 80px 40px;
+}
+
+.qr {
+  background-color: white;
+  aspect-ratio: 1;
+}
+
+.scanning {
+  color: white;
+  text-align: center;
+  width: 100%;
 }

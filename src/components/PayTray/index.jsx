@@ -8,6 +8,7 @@ import {
   AiOutlineQrcode,
   AiOutlineBank,
   AiOutlinePlusCircle,
+  AiOutlineShop
 } from "react-icons/ai";
 import { BsArrowDownUp, BsArrowDownCircle } from "react-icons/bs";
 import { TbCoin } from "react-icons/tb";
@@ -15,7 +16,7 @@ import { RiCoupon2Line } from "react-icons/ri";
 
 function PayTray() {
   const [showMenu, setShowMenu] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleMenuToggle = (event) => {
     if (event.type === "touchstart") {
@@ -29,17 +30,17 @@ function PayTray() {
     const touch = event.changedTouches[0];
     const absoluteX = touch.pageX;
     const absoluteY = touch.pageY;
-    const elements = document.elementsFromPoint(absoluteX, absoluteY)
-    
-    const topupElement = elements.find(element => element.id === 'topup');
-    const scanElement = elements.find(element => element.id === 'scan');
+    const elements = document.elementsFromPoint(absoluteX, absoluteY);
+
+    const topupElement = elements.find((element) => element.id === "topup");
+    const scanElement = elements.find((element) => element.id === "scan");
 
     if (topupElement) {
-      navigate("topup")
+      navigate("topup");
     } else if (scanElement) {
-      navigate("scan")
+      navigate("scan");
     }
-    
+
     setShowMenu(false);
   };
 
@@ -94,7 +95,11 @@ function PayTray() {
                     text="Top Up"
                     id="topup"
                   />
-                  <TrayItem icon={<AiOutlineScan size={24} />} text="Scan" id="scan" />
+                  <TrayItem
+                    icon={<AiOutlineScan size={24} />}
+                    text="Scan"
+                    id="scan"
+                  />
                   <TrayItem
                     icon={<BsArrowDownUp size={24} />}
                     text="Transfer"
@@ -112,6 +117,11 @@ function PayTray() {
               )}
             </div>
           </>
+        )}
+        {variant === "3" && (
+          <Link to={`shopeepay`} className={styles.icon}>
+            <AiOutlineShop size={24} />
+          </Link>
         )}
       </>
     );
