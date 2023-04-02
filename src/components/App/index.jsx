@@ -11,7 +11,7 @@ function App() {
     <div className={styles.app}>
       <Router>
         <Routes>
-          <Route path="/1">
+          <Route path="/:variant">
             <Route index element={<Main />} />
             <Route path='scan' element={<Scan />} />
             <Route path='payto' element={<PayTo />} />

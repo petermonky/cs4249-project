@@ -14,11 +14,9 @@ function Main() {
     <div className={styles.content}>
       <Topbar />
       <Banner />
-      <div>
-        <div className={styles.offsetSection}>
-          <PayTray />
-          <QuickTray />
-        </div>
+      <div className={styles.offsetSection}>
+        <PayTray />
+        <QuickTray />
       </div>
       <Vouchers />
       <Recommended />
