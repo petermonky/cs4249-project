@@ -19,7 +19,9 @@ function PayTray() {
       <Link to={`scan`} className={styles.icon} >
         <AiOutlineScan size={24} />
       </Link>
-      <PayTrayItem icon={<AiOutlineWallet color="orange" />} title="$0.00" description="Top up & earn rewards" />
+      <Link to={`shopeepay`} style={{ textDecoration: 'none', color: 'inherit', flex: 1 }} >
+        <PayTrayItem icon={<AiOutlineWallet color="orange" />} title="$0.00" description="Top up & earn rewards" />
+      </Link>
       <PayTrayItem icon={<TbCoin color="yellow" />} title="0" description="Check in daily to earn coins!" />
       <PayTrayItem icon={<RiCoupon2Line color="green" />} title="5" description="Vouchers" />
     </div>
