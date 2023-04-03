@@ -9,7 +9,7 @@ import TopUp from '../TopUp'
 function App() {
   return (
     <div className={styles.app}>
-      <Router basename="/cs4249-project">
+      <Router>
         <Routes>
           <Route path="/:variant">
             <Route index element={<Main />} />
