@@ -8,7 +8,7 @@ import {
   AiOutlineQrcode,
   AiOutlineBank,
   AiOutlinePlusCircle,
-  AiOutlineShop
+  AiOutlineShop,
 } from "react-icons/ai";
 import { BsArrowDownUp, BsArrowDownCircle } from "react-icons/bs";
 import { TbCoin } from "react-icons/tb";
@@ -17,6 +17,7 @@ import { RiCoupon2Line } from "react-icons/ri";
 function PayTray() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const { variant } = useParams();
 
   const handleMenuToggle = (event) => {
     if (event.type === "touchstart") {
@@ -47,16 +48,25 @@ function PayTray() {
   return (
     <div className={styles.paytray}>
       {renderButton()}
-      <Link
-        to={`shopeepay`}
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
+      {["1", "3"].includes(variant) && (
+        <Link
+          to={`shopeepay`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <PayTrayItem
+            icon={<AiOutlineWallet color="orange" />}
+            title="$0.00"
+            description="Top up & earn rewards"
+          />
+        </Link>
+      )}
+      {variant === "2" && (
         <PayTrayItem
           icon={<AiOutlineWallet color="orange" />}
           title="$0.00"
           description="Top up & earn rewards"
         />
-      </Link>
+      )}
       <PayTrayItem
         icon={<TbCoin color="yellow" />}
         title="0"

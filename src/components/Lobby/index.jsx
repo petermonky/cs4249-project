@@ -9,7 +9,7 @@ function Lobby() {
     <div className={styles.container}>
       <h1 className={styles.title}>CS4249 Project Variants</h1>
       {variants.map((v) => (
-        <Link to={`${v}`} className={styles.link}><div><span>Variant {v}</span></div></Link>
+        <Link to={`${v}`} className={styles.link} key={`variant-${v}`}><div><span>Variant {v}</span></div></Link>
       ))}
     </div>
   );
