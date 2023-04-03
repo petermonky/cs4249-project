@@ -10,7 +10,16 @@ import {
   AiOutlineQrcode,
   AiOutlineBank,
 } from "react-icons/ai";
-import { BsArrowDownUp, BsArrowDownCircle, BsFillCheckCircleFill } from "react-icons/bs";
+import {
+  BsArrowDownUp,
+  BsArrowDownCircle,
+  BsFillCheckCircleFill,
+} from "react-icons/bs";
+import { ImSpinner8 } from "react-icons/im";
+
+import qrUrl from "/qrshopee.webp";
+import mcdonaldsUrl from "/mcdonalds.webp"
+import promotionUrl from "/promotion.webp"
 
 function ShopeePay() {
   const [subPage, setSubPage] = useState("topup");
@@ -18,8 +27,8 @@ function ShopeePay() {
   const { variant } = useParams();
   const navigate = useNavigate();
   const timerRef = useRef();
-  const [isPaymentConfirmed, setIsPaymentConfirmed] = useState(false)
-  const [isTopupConfirmed, setIsTopupConfirmed] = useState(false)
+  const [isPaymentConfirmed, setIsPaymentConfirmed] = useState(false);
+  const [isTopupConfirmed, setIsTopupConfirmed] = useState(false);
 
   function confirmTopup() {
     document.dispatchEvent(
@@ -30,7 +39,7 @@ function ShopeePay() {
         },
       })
     );
-    setIsTopupConfirmed(true)
+    setIsTopupConfirmed(true);
   }
 
   function confirmPayment() {
@@ -42,7 +51,7 @@ function ShopeePay() {
         },
       })
     );
-    setIsPaymentConfirmed(true)
+    setIsPaymentConfirmed(true);
   }
 
   useEffect(() => {
@@ -110,7 +119,7 @@ function ShopeePay() {
           </div>
           <div className={styles.promotions}>
             <span className={styles.promotions__title}>Ongoing Promotions</span>
-            <div className={styles.promotions__image}></div>
+            <img src={promotionUrl} alt="Promotion" className={styles.promotions__image}/>
           </div>
           <div className={styles.transactions}>
             <span className={styles.transactions__title}>
@@ -163,38 +172,42 @@ function ShopeePay() {
     return isScanLoading ? (
       <>
         <div className={styles.qrContainer}>
-          <div className={styles.qr}></div>
+          <img src={qrUrl} alt="qr" className={styles.qr} />
+          <div class={styles.pulsing} />
         </div>
         <div className={styles.scanning}>
           <span>Scanning...</span>
+          <ImSpinner8 color="white" className={styles.spinning} />
         </div>
         <Barcode />
       </>
     ) : (
       <>
-      <div className={styles.payTo}>
-        <div className={styles.container}>
-          <div className={styles.recipient}>
-            <div className={styles.recipient__image}></div>
-            <span className={styles.recipient__name}>McDonald's</span>
-          </div>
-          <div className={styles.payment}>
-            <span className={styles.payment__title}>Pay Amount</span>
-            <div className={styles.payment__body}>
-              <span className={styles.payment__sign}>$</span>
-              <span className={styles.payment__cost}>22.20</span>
+        <div className={styles.payTo}>
+          <div className={styles.container}>
+            <div className={styles.recipient}>
+              <img src={mcdonaldsUrl} alt="McDonald's" className={styles.recipient__image}/>
+              <span className={styles.recipient__name}>McDonald's</span>
             </div>
-            <span className={styles.payment__memo}>Enter Memo (Optional)</span>
+            <div className={styles.payment}>
+              <span className={styles.payment__title}>Pay Amount</span>
+              <div className={styles.payment__body}>
+                <span className={styles.payment__sign}>$</span>
+                <span className={styles.payment__cost}>22.20</span>
+              </div>
+              <span className={styles.payment__memo}>
+                Enter Memo (Optional)
+              </span>
+            </div>
           </div>
+          <button className={styles.confirm} onClick={confirmPayment}>
+            <div className={styles.confirm__text}>
+              <span>Confirm Payment</span>
+            </div>
+          </button>
         </div>
-        <button className={styles.confirm} onClick={confirmPayment}>
-          <div className={styles.confirm__text}>
-            <span>Confirm Payment</span>
-          </div>
-        </button>
-      </div>
-      {isPaymentConfirmed && <Confirmation title="Payment Success!" />}
-    </>
+        {isPaymentConfirmed && <Confirmation title="Payment Success!" />}
+      </>
     );
   }
 

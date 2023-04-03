@@ -5,6 +5,8 @@ import styles from "./PayTo.module.scss";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
+import mcdonaldsUrl from "/mcdonalds.webp"
+
 function PayTo() {
   const navigate = useNavigate();
   const { variant } = useParams();
@@ -50,7 +52,8 @@ function PayTo() {
         </div>
         <div className={styles.container}>
           <div className={styles.recipient}>
-            <div className={styles.recipient__image}></div>
+            <img src={mcdonaldsUrl} alt="McDonald's" className={styles.recipient__image} />
+            {/* <div className={styles.recipient__image}></div> */}
             <span className={styles.recipient__name}>McDonald's</span>
           </div>
           <div className={styles.payment}>
