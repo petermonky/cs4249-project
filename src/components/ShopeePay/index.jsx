@@ -46,6 +46,8 @@ function ShopeePay() {
   }
 
   useEffect(() => {
+    document.addEventListener("confirmtopup", loggingjs.logEvent, true);
+    document.addEventListener("confirmpayment", loggingjs.logEvent, true);
     document.addEventListener("shopeepayloaded", loggingjs.logEvent, true);
     document.dispatchEvent(
       new CustomEvent("shopeepayloaded", {

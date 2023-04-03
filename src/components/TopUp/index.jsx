@@ -23,6 +23,7 @@ function TopUp() {
   }
 
   useEffect(() => {
+    document.addEventListener("confirmtopup", loggingjs.logEvent, true);
     document.addEventListener("topuploaded", loggingjs.logEvent, true);
     document.dispatchEvent(
       new CustomEvent("topuploaded", {
