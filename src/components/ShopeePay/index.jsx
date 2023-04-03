@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./ShopeePay.module.scss";
 import Barcode from "../Barcode";
@@ -10,12 +10,40 @@ import {
   AiOutlineQrcode,
   AiOutlineBank,
 } from "react-icons/ai";
-import { BsArrowDownUp, BsArrowDownCircle } from "react-icons/bs";
+import { BsArrowDownUp, BsArrowDownCircle, BsFillCheckCircleFill } from "react-icons/bs";
 
 function ShopeePay() {
   const [subPage, setSubPage] = useState("topup");
+  const [isScanLoading, setIsScanLoading] = useState(true);
   const { variant } = useParams();
   const navigate = useNavigate();
+  const timerRef = useRef();
+  const [isPaymentConfirmed, setIsPaymentConfirmed] = useState(false)
+  const [isTopupConfirmed, setIsTopupConfirmed] = useState(false)
+
+  function confirmTopup() {
+    document.dispatchEvent(
+      new CustomEvent("confirmtopup", {
+        detail: {
+          eventName: "confirmtopup",
+          info: { variant },
+        },
+      })
+    );
+    setIsTopupConfirmed(true)
+  }
+
+  function confirmPayment() {
+    document.dispatchEvent(
+      new CustomEvent("confirmpayment", {
+        detail: {
+          eventName: "confirmpayment",
+          info: { variant },
+        },
+      })
+    );
+    setIsPaymentConfirmed(true)
+  }
 
   useEffect(() => {
     document.addEventListener("shopeepayloaded", loggingjs.logEvent, true);
@@ -96,7 +124,10 @@ function ShopeePay() {
               className={`${styles.tabButton} ${
                 subPage === "topup" ? styles.selected : ""
               }`}
-              onClick={() => setSubPage("topup")}
+              onClick={() => {
+                setSubPage("topup");
+                clearTimeout(timerRef.current);
+              }}
             >
               Top Up
             </button>
@@ -104,7 +135,13 @@ function ShopeePay() {
               className={`${styles.tabButton} ${
                 subPage === "scan" ? styles.selected : ""
               }`}
-              onClick={() => setSubPage("scan")}
+              onClick={() => {
+                setSubPage("scan");
+                setIsScanLoading(true);
+                timerRef.current = setTimeout(() => {
+                  setIsScanLoading(false);
+                }, 3000);
+              }}
             >
               Scan
             </button>
@@ -119,41 +156,81 @@ function ShopeePay() {
       )}
     </div>
   );
-}
 
-function renderTopUp() {
-  return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.payment}>
-          <span className={styles.payment__title}>Top Up Amount</span>
-          <div className={styles.payment__body}>
-            <span className={styles.payment__sign}>$</span>
-            <span className={styles.payment__cost}>22.20</span>
+  function renderScan() {
+    return isScanLoading ? (
+      <>
+        <div className={styles.qrContainer}>
+          <div className={styles.qr}></div>
+        </div>
+        <div className={styles.scanning}>
+          <span>Scanning...</span>
+        </div>
+        <Barcode />
+      </>
+    ) : (
+      <>
+      <div className={styles.payTo}>
+        <div className={styles.container}>
+          <div className={styles.recipient}>
+            <div className={styles.recipient__image}></div>
+            <span className={styles.recipient__name}>McDonald's</span>
           </div>
-          <span className={styles.payment__memo}>Enter Memo (Optional)</span>
+          <div className={styles.payment}>
+            <span className={styles.payment__title}>Pay Amount</span>
+            <div className={styles.payment__body}>
+              <span className={styles.payment__sign}>$</span>
+              <span className={styles.payment__cost}>22.20</span>
+            </div>
+            <span className={styles.payment__memo}>Enter Memo (Optional)</span>
+          </div>
         </div>
+        <button className={styles.confirm} onClick={confirmPayment}>
+          <div className={styles.confirm__text}>
+            <span>Confirm Payment</span>
+          </div>
+        </button>
       </div>
-      <div className={styles.confirm}>
-        <div className={styles.confirm__text}>
-          <span>Confirm Top Up</span>
-        </div>
-      </div>
+      {isPaymentConfirmed && <Confirmation title="Payment Success!" />}
     </>
-  );
+    );
+  }
+
+  function renderTopUp() {
+    return (
+      <>
+        <div className={styles.container}>
+          <div className={styles.payment}>
+            <span className={styles.payment__title}>Top Up Amount</span>
+            <div className={styles.payment__body}>
+              <span className={styles.payment__sign}>$</span>
+              <span className={styles.payment__cost}>22.20</span>
+            </div>
+            <span className={styles.payment__memo}>Enter Memo (Optional)</span>
+          </div>
+        </div>
+        <div className={styles.confirm} onClick={confirmTopup}>
+          <div className={styles.confirm__text}>
+            <span>Confirm Top Up</span>
+          </div>
+        </div>
+        {isTopupConfirmed && <Confirmation title="Top Up Success!" />}
+      </>
+    );
+  }
 }
 
-function renderScan() {
+function Confirmation({ title }) {
   return (
-    <>
-      <div className={styles.qrContainer}>
-        <div className={styles.qr}></div>
+    <div className={styles.confirmedPayment}>
+      <div className={styles.confirmedPayment__container}>
+        <BsFillCheckCircleFill color="green" size={80} />
+        <span className={styles.confirmedPayment__title}>{title}</span>
+        <span className={styles.confirmedPayment__description}>
+          <i>(For testers: please exit this tab and return to the survey.)</i>
+        </span>
       </div>
-      <div className={styles.scanning}>
-        <span>Scanning...</span>
-      </div>
-      <Barcode />
-    </>
+    </div>
   );
 }
 

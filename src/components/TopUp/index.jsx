@@ -1,12 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./TopUp.module.scss";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 function TopUp() {
   const navigate = useNavigate();
   const { variant } = useParams();
+  const [isTopupConfirmed, setIsTopupConfirmed] = useState(false)
+
+  function confirmTopup() {
+    document.dispatchEvent(
+      new CustomEvent("confirmtopup", {
+        detail: {
+          eventName: "confirmtopup",
+          info: { variant },
+        },
+      })
+    );
+    setIsTopupConfirmed(true)
+  }
 
   useEffect(() => {
     document.addEventListener("topuploaded", loggingjs.logEvent, true);
@@ -38,10 +52,25 @@ function TopUp() {
           <span className={styles.payment__memo}>Enter Memo (Optional)</span>
         </div>
       </div>
-      <div className={styles.confirm}>
+      <div className={styles.confirm} onClick={confirmTopup}>
         <div className={styles.confirm__text}>
           <span>Confirm Top Up</span>
         </div>
+      </div>
+      {isTopupConfirmed && <ConfirmTopup /> }
+    </div>
+  );
+}
+
+function ConfirmTopup() {
+  return (
+    <div className={styles.confirmedPayment}>
+      <div className={styles.confirmedPayment__container}>
+        <BsFillCheckCircleFill color="green" size={80} />
+        <span className={styles.confirmedPayment__title}>Top Up Success!</span>
+        <span className={styles.confirmedPayment__description}>
+          <i>(For testers: please exit this tab and return to the survey.)</i>
+        </span>
       </div>
     </div>
   );
