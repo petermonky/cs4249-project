@@ -1,19 +1,32 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import styles from "./PayTo.module.scss"
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import styles from "./PayTo.module.scss";
 
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function PayTo() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { variant } = useParams();
+
+  useEffect(() => {
+    document.addEventListener("paytoloaded", loggingjs.logEvent, true);
+    document.dispatchEvent(
+      new CustomEvent("paytoloaded", {
+        detail: {
+          eventName: "scanloaded",
+          info: { variant },
+        },
+      })
+    );
+  }, []);
 
   return (
     <div className={styles.payTo}>
       <div className={styles.header}>
         <Link to="#" onClick={() => navigate(-1)}>
-            <AiOutlineArrowLeft size={24} color="black" className={styles.icon} />
+          <AiOutlineArrowLeft size={24} color="black" className={styles.icon} />
         </Link>
-       <span>Pay To</span>
+        <span>Pay To</span>
       </div>
       <div className={styles.container}>
         <div className={styles.recipient}>
@@ -22,7 +35,10 @@ function PayTo() {
         </div>
         <div className={styles.payment}>
           <span className={styles.payment__title}>Pay Amount</span>
-          <div className={styles.payment__body}><span className={styles.payment__sign}>$</span><span className={styles.payment__cost}>22.20</span></div>
+          <div className={styles.payment__body}>
+            <span className={styles.payment__sign}>$</span>
+            <span className={styles.payment__cost}>22.20</span>
+          </div>
           <span className={styles.payment__memo}>Enter Memo (Optional)</span>
         </div>
       </div>
@@ -32,7 +48,7 @@ function PayTo() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default PayTo
+export default PayTo;

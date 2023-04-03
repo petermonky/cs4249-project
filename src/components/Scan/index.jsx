@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import styles from "./Scan.module.scss"
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import styles from "./Scan.module.scss";
 
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import Barcode from "../Barcode"
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Barcode from "../Barcode";
 
 function Scan() {
   const navigate = useNavigate();
+  const { variant } = useParams();
+
+  useEffect(() => {
+    document.addEventListener("scanloaded", loggingjs.logEvent, true);
+    document.dispatchEvent(
+      new CustomEvent("scanloaded", {
+        detail: {
+          eventName: "scanloaded",
+          info: { variant },
+        },
+      })
+    );
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('../payto');
+      navigate("../payto");
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -18,9 +31,9 @@ function Scan() {
 
   return (
     <div className={styles.scan}>
-    <Link to="#" onClick={() => navigate(-1)}>
+      <Link to="#" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={24} color="white" className={styles.icon} />
-    </Link>
+      </Link>
       <div className={styles.qrContainer}>
         <div className={styles.qr}></div>
       </div>
@@ -29,7 +42,7 @@ function Scan() {
       </div>
       <Barcode />
     </div>
-  )
+  );
 }
 
-export default Scan
+export default Scan;

@@ -29,6 +29,7 @@ var EVENT_TYPES_TO_LOG = {
 var EVENT_PROPERTIES_TO_LOG = {
   which: true,
   changedTouches: true,
+  detail: true,
 };
 
 // This function is called to record some global state on each event.

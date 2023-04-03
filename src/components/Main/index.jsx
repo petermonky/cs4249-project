@@ -1,18 +1,30 @@
-import React from 'react'
-import styles from "./Main.module.scss"
+import React, { useEffect } from "react";
+import styles from "./Main.module.scss";
 
-import Navbar from '../Navbar'
-import Topbar from '../Topbar'
-import Banner from "../Banner"
-import PayTray from "../PayTray"
-import QuickTray from '../QuickTray'
-import Vouchers from "../Vouchers"
-import Recommended from '../Recommended'
-import { useParams } from 'react-router-dom'
+import Navbar from "../Navbar";
+import Topbar from "../Topbar";
+import Banner from "../Banner";
+import PayTray from "../PayTray";
+import QuickTray from "../QuickTray";
+import Vouchers from "../Vouchers";
+import Recommended from "../Recommended";
+import { useParams } from "react-router-dom";
 
 function Main() {
-  const { variant } = useParams()
-  const isOldLayout = ["1", "2", "3"].includes(variant)
+  const { variant } = useParams();
+  const isOldLayout = ["1", "2", "3"].includes(variant);
+
+  useEffect(() => {
+    document.addEventListener("mainloaded", loggingjs.logEvent, true);
+    document.dispatchEvent(
+      new CustomEvent("mainloaded", {
+        detail: {
+          eventName: "mainloaded",
+          info: { variant },
+        },
+      })
+    );
+  }, []);
 
   return (
     <div className={styles.content}>
@@ -26,7 +38,7 @@ function Main() {
       <Recommended />
       <Navbar />
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;

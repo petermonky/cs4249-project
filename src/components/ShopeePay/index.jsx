@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./ShopeePay.module.scss";
 import Barcode from "../Barcode";
@@ -15,10 +15,26 @@ import { BsArrowDownUp, BsArrowDownCircle } from "react-icons/bs";
 function ShopeePay() {
   const [subPage, setSubPage] = useState("topup");
   const { variant } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.addEventListener("shopeepayloaded", loggingjs.logEvent, true);
+    document.dispatchEvent(
+      new CustomEvent("shopeepayloaded", {
+        detail: {
+          eventName: "shopeepayloaded",
+          info: { variant },
+        },
+      })
+    );
+  }, []);
 
   return (
-    <div className={`${styles.shopeepay} ${subPage === "scan" ? styles.scanSelected : ""}`}>
+    <div
+      className={`${styles.shopeepay} ${
+        subPage === "scan" ? styles.scanSelected : ""
+      }`}
+    >
       <div className={styles.top}>
         <div className={styles.header}>
           <Link to="#" onClick={() => navigate(-1)}>
