@@ -1,14 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from "./TopUp.module.scss"
 
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 function TopUp() {
+  const navigate = useNavigate()
+
   return (
     <div className={styles.topUp}>
       <div className={styles.header}>
-        <Link to="javascript:history.back()">
+        <Link to="#" onClick={() => navigate(-1)}>
             <AiOutlineArrowLeft size={24} color="black" className={styles.icon} />
         </Link>
        <span>Top Up</span>

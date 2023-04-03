@@ -1,14 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from "./PayTo.module.scss"
 
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 
 function PayTo() {
+  const navigate = useNavigate()
+
   return (
     <div className={styles.payTo}>
       <div className={styles.header}>
-        <Link to="javascript:history.back()">
+        <Link to="#" onClick={() => navigate(-1)}>
             <AiOutlineArrowLeft size={24} color="black" className={styles.icon} />
         </Link>
        <span>Pay To</span>

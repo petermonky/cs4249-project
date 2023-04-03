@@ -26,7 +26,7 @@ function VoucherItem({ colour, content, title, description, tags = [] }) {
         <span className={styles.voucherItem__title}>{title}</span>
         <div className={styles.voucherItem__tags}>
           {tags.map((tag) => (
-            <span className={styles.voucherItem__tag}>{tag}</span>
+            <span key={tag} className={styles.voucherItem__tag}>{tag}</span>
           ))}
         </div>
         <span className={styles.voucherItem__description}>{description}</span>

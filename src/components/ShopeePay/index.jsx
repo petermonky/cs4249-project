@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./ShopeePay.module.scss";
 import Barcode from "../Barcode";
 
@@ -15,12 +15,13 @@ import { BsArrowDownUp, BsArrowDownCircle } from "react-icons/bs";
 function ShopeePay() {
   const [subPage, setSubPage] = useState("topup");
   const { variant } = useParams();
+  const navigate = useNavigate()
 
   return (
     <div className={`${styles.shopeepay} ${subPage === "scan" ? styles.scanSelected : ""}`}>
       <div className={styles.top}>
         <div className={styles.header}>
-          <Link to="javascript:history.back()">
+          <Link to="#" onClick={() => navigate(-1)}>
             <AiOutlineArrowLeft
               size={24}
               color="white"

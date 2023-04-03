@@ -18,7 +18,7 @@ function Scan() {
 
   return (
     <div className={styles.scan}>
-    <Link to="javascript:history.back()">
+    <Link to="#" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={24} color="white" className={styles.icon} />
     </Link>
       <div className={styles.qrContainer}>
