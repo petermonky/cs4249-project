@@ -43,13 +43,13 @@ function ShopeePay() {
             <div className={styles.tray}>
               <Link
                 to={`../topup`}
-                style={{ textDecoration: "none", color: "inherit", flex: 1 }}
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 <TrayItem icon={<AiOutlineWallet size={36} />} text="Top Up" />
               </Link>
               <Link
                 to={`../scan`}
-                style={{ textDecoration: "none", color: "inherit", flex: 1 }}
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 <TrayItem icon={<AiOutlineScan size={36} />} text="Scan" />
               </Link>

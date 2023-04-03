@@ -49,7 +49,7 @@ function PayTray() {
       {renderButton()}
       <Link
         to={`shopeepay`}
-        style={{ textDecoration: "none", color: "inherit", flex: 1 }}
+        style={{ textDecoration: "none", color: "inherit" }}
       >
         <PayTrayItem
           icon={<AiOutlineWallet color="orange" />}

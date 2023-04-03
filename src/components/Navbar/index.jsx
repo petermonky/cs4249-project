@@ -85,7 +85,7 @@ function Navbar() {
         {["4", "6"].includes(variant) && (
           <Link
             to="shopeepay"
-            style={{ textDecoration: "none", color: "inherit", flex: 1 }}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
             <NavbarLink
               icon={<AiOutlineShop size={28} color="#616161" />}
